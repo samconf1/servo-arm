@@ -4,7 +4,7 @@ import board
 import time 
 import busio
 
-i2c = busio.I2C(board.SCL, board.SDA) #initialise i2c bus 
+i2c = busio.I2C(board.D22, board.S21) #initialise i2c bus 
 pca = adafruit_pca9685.PCA9685(i2c) # initialise pca9685 board
 
 servo_poll_rate = 0.01 #update every 10ms 
@@ -25,7 +25,7 @@ class joystick_controlled_servo(Servo):
         super().__init__(servo_channel, min, max) #call parent init function
         self.joystick = analogio.AnalogIn(joystick_pin)
         self.current_angle = 90 #start at middle position
-        pca.channels[self.servo_channel].duty_cycle = hex(int(((180 + self.current_angle) / 3600) * 65535))
+        pca.channels[self.servo_channel].duty_cycle = int(((180 + self.current_angle) / 3600) * 65535)
         
     
     def is_input_active(self):
