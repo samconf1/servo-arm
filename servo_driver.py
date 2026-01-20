@@ -6,6 +6,7 @@ import busio
 
 i2c = busio.I2C(board.D22, board.S21) #initialise i2c bus 
 pca = adafruit_pca9685.PCA9685(i2c) # initialise pca9685 board
+pca.channels.frequency = 50
 
 servo_poll_rate = 0.01 #update every 10ms 
 
@@ -14,7 +15,6 @@ class Servo:
     def __init__(self, servo_channel, min, max):
         self.servo_min_angle = min #servo min angle
         self.servo_max_angle = max #servo max angle 
-        pca.channels[servo_channel].frequency = 50 #set channel specific pwm frequency
         self.servo_channel = servo_channel #set servo channel - relates to channel on pca board
 
 
