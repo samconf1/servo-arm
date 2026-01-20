@@ -37,7 +37,7 @@ class joystick_controlled_servo(Servo):
         new_angle = self.current_angle + self.joystick.value * (0.00025*servo_poll_rate)
         if new_angle < self.servo_max_angle and new_angle > self.servo_min_angle: #check if new angle is within servo bounds. 
             self.current_angle = new_angle #update current angle to new angle
-            pca.channels[self.servo_channel].duty_cycle = hex(int(((180 + self.current_angle) / 3600) * 65535)) #update servo duty cycle to match new angle. 
+            pca.channels[self.servo_channel].duty_cycle = int(((180 + self.current_angle) / 3600) * 65535) #update servo duty cycle to match new angle. 
             return
     
 
@@ -58,7 +58,7 @@ class pot_controlled_servo(Servo):
         new_angle = self.angle_per_unit * self.lastpotvalue + self.servo_min_angle
         if new_angle < self.servo_max_angle and new_angle > self.servo_min_angle: #check if new angle is within servo bounds. 
             self.current_angle = new_angle #update current angle to new angle
-            pca.channels[self.servo_channel].duty_cycle = hex(int(((180 + self.current_angle) / 3600) * 65535)) #update servo duty cycle to match new angle. 
+            pca.channels[self.servo_channel].duty_cycle = int(((180 + self.current_angle) / 3600) * 65535) #update servo duty cycle to match new angle. 
             return
 
 
