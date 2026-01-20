@@ -65,8 +65,7 @@ class pot_controlled_servo(Servo):
         
 #create servo objects and add to list
 servo_objects = []
-servo_objects.append(joystick_controlled_servo(0, board.A0, 0, 180))
-servo_objects.append(pot_controlled_servo(1, board.A1, 0, 180))
+servo_objects.append(joystick_controlled_servo(0, board.D34, 0, 180))
 
 
 next_run = time.monotonic() #set start time 
